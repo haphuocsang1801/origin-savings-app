@@ -1,9 +1,10 @@
 import { Route, Routes } from 'react-router'
-import Test from './components/Test'
+import { lazy } from 'react'
+const Home = lazy(() => import('@/pages/Home'))
 function App() {
   return (
     <Routes>
-      <Route path='/' element={<Test />} />
+      <Route path='/' element={<Home />} />
     </Routes>
   )
 }

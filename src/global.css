@@ -1,0 +1,29 @@
+/* font */
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer base {
+  :root {
+    /* color */
+    --blueGray900: #1E2A32;
+    --neutralWhite: #FFFFFF;
+    --blueGray50: #E9EEF2;
+    --blueGray100: #CBD5DC;
+    --blueGray300: #8A9CA9;
+    --blueGray400: #708797;
+    --blueGray10: #F4F8FA;
+    --blueGray600: #4D6475;
+    --brandColorPrimary: #1B31A8;
+    --brandColorSecondary: #0079FF;
+
+    /* shadow */
+    --shadowLevel4: 0px 16px 32px 0px #1E2A3214;
+  }
+  html {
+    @apply text-base font-normal leading-normal font-workSans;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+}
