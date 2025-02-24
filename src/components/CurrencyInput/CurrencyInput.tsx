@@ -30,7 +30,12 @@ const CurrencyInput = ({ value, onChangeCurrencyInput, name = 'amount', ...props
 
   const handleBlur = () => {
     setIsFocused(false)
-    setDisplayValue(formatCurrency(value))
+    setDisplayValue(
+      formatCurrency(value, {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      })
+    )
   }
 
   const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {

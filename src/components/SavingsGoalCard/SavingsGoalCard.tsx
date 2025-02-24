@@ -1,15 +1,14 @@
-import React, { useState, useEffect } from 'react'
-import { SavingsGoal } from '@/types'
+import ConfirmModal from '@/components/ConfirmModal/ConfirmModal'
 import CurrencyInput from '@/components/CurrencyInput/CurrencyInput'
 import DateSelector from '@/components/DateSelector/DateSelector'
-import ConfirmModal from '@/components/ConfirmModal/ConfirmModal'
-import { DEFAULT_AMOUNT } from '@/utils/constants'
-import { calculateMonthDifference } from '@/utils/date'
-import { calculateMonthlyAmount } from '@/utils/calculations'
-import LayoutPrimary from '@/layouts/LayoutPrimary'
-import FormLabel from '@/components/ui/FormLabel'
 import MonthlyAmountSummary from '@/components/MonthlyAmountSummary/MonthlyAmountSummary'
 import Button from '@/components/ui/Button'
+import FormLabel from '@/components/ui/FormLabel'
+import { SavingsGoal } from '@/types'
+import { calculateMonthlyAmount } from '@/utils/calculations'
+import { DEFAULT_AMOUNT } from '@/utils/constants'
+import { calculateMonthDifference } from '@/utils/date'
+import React, { useEffect, useState } from 'react'
 
 const SavingsGoalCard: React.FC = () => {
   // State management
@@ -41,7 +40,6 @@ const SavingsGoalCard: React.FC = () => {
     }))
   }, [savingsGoal.amount, savingsGoal.reachDate])
 
-  // Handlers
   const handleAmountChange = (newAmount: number) => {
     setSavingsGoal((prev) => ({ ...prev, amount: newAmount }))
   }
@@ -51,58 +49,50 @@ const SavingsGoalCard: React.FC = () => {
   }
 
   return (
-    <LayoutPrimary>
-      <div className='max-w-[560px] mx-auto w-full'>
-        {/* Title */}
-        <h1 className='mt-8 mb-6 text-lg text-center md:text-xl md:mt-12 md:mb-6 text-brandColorPrimary'>
-          Let's plan your <span className='font-semibold '>saving goal</span>
-        </h1>
-
-        {/* Main Card */}
-        <div className='w-full p-6 overflow-hidden bg-white rounded-lg md:px-10 md:py-8 shadow-level4'>
-          {/* Card Header */}
-          <div className='flex items-center mb-[18px] md:mb-6'>
-            <div className='flex items-center justify-center mr-4 size-16'>
-              <img src='/icon-home.png' alt='Home Icon' className='w-full h-full text-blue-600' />
-            </div>
-            <div>
-              <h2 className='text-xl font-medium md:text-2xl text-blueGray900 font-rubik'>Buy a house</h2>
-              <p className='text-sm md:text-base text-blueGray400'>Saving goal</p>
-            </div>
+    <>
+      {/* Main Card */}
+      <div className='w-full p-6 overflow-hidden bg-white rounded-lg md:px-10 md:py-8 shadow-level4'>
+        {/* Card Header */}
+        <div className='flex items-center mb-6'>
+          <div className='flex items-center justify-center mr-4 size-16'>
+            <img src='/icon-home.png' alt='Home Icon' className='w-full h-full text-blue-600' />
           </div>
-
-          {/* Input Fields */}
-          <div className='flex flex-col items-center gap-4 mb-6 md:mb-8 md:flex-row '>
-            {/* Amount Input */}
-            <FormLabel label='Total amount' htmlFor='amount' className='flex-1 w-full'>
-              <CurrencyInput value={savingsGoal.amount} onChangeCurrencyInput={handleAmountChange} name='amount' />
-            </FormLabel>
-
-            {/* Date Selector */}
-            <FormLabel label='Reach goal by' className='w-full md:w-[192px]'>
-              <DateSelector
-                selectedDate={savingsGoal.reachDate}
-                onChangeDateSelector={handleDateChange}
-                className='w-full'
-              />
-            </FormLabel>
+          <div>
+            <h2 className='text-xl font-medium md:text-2xl text-blueGray900 font-rubik'>Buy a house</h2>
+            <p className='text-sm md:text-base text-blueGray400'>Saving goal</p>
           </div>
-
-          {/* Monthly Amount Summary */}
-          <MonthlyAmountSummary
-            monthlyAmount={savingsGoal.monthlyAmount}
-            totalMonths={savingsGoal.totalMonths}
-            amount={savingsGoal.amount}
-            reachDate={savingsGoal.reachDate}
-          />
-
-          {/* Card Footer */}
-          <Button className='mx-auto max-w-80' fullWidth onClick={() => setShowModal(true)}>
-            Confirm
-          </Button>
         </div>
-      </div>
 
+        {/* Input Fields */}
+        <div className='flex items-center gap-4 mb-8'>
+          {/* Amount Input */}
+          <FormLabel label='Total amount' htmlFor='amount' className='flex-1 w-full'>
+            <CurrencyInput value={savingsGoal.amount} onChangeCurrencyInput={handleAmountChange} name='amount' />
+          </FormLabel>
+
+          {/* Date Selector */}
+          <FormLabel label='Reach goal by' className='w-[192px]'>
+            <DateSelector
+              selectedDate={savingsGoal.reachDate}
+              onChangeDateSelector={handleDateChange}
+              className='w-full'
+            />
+          </FormLabel>
+        </div>
+
+        {/* Monthly Amount Summary */}
+        <MonthlyAmountSummary
+          monthlyAmount={savingsGoal.monthlyAmount}
+          totalMonths={savingsGoal.totalMonths}
+          amount={savingsGoal.amount}
+          reachDate={savingsGoal.reachDate}
+        />
+
+        {/* Card Footer */}
+        <Button className='mx-auto max-w-80' fullWidth onClick={() => setShowModal(true)}>
+          Confirm
+        </Button>
+      </div>
       {/* Confirmation Modal */}
       {showModal && (
         <ConfirmModal
@@ -113,7 +103,7 @@ const SavingsGoalCard: React.FC = () => {
           reachDate={savingsGoal.reachDate}
         />
       )}
-    </LayoutPrimary>
+    </>
   )
 }
 

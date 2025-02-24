@@ -1,4 +1,5 @@
-import React from 'react'
+import { formatCurrency } from '@/utils/currency'
+import { formatMonth, formatYear } from '@/utils/date'
 
 interface MonthlyAmountSummaryProps {
   monthlyAmount: number
@@ -7,27 +8,14 @@ interface MonthlyAmountSummaryProps {
   reachDate: Date
 }
 
-const MonthlyAmountSummary: React.FC<MonthlyAmountSummaryProps> = ({
-  monthlyAmount,
-  totalMonths,
-  amount,
-  reachDate
-}) => {
-  const formatMonth = (date: Date): string => {
-    return date.toLocaleString('default', { month: 'long' })
-  }
-
-  const formatYear = (date: Date): number => {
-    return date.getFullYear()
-  }
-
+const MonthlyAmountSummary = ({ monthlyAmount, totalMonths, amount, reachDate }: MonthlyAmountSummaryProps) => {
   return (
     <div className='mb-8 overflow-hidden border rounded-lg border-blueGray50'>
       <div className='flex items-center justify-between p-6 md:pt-6 md:pb-4 md:px-8'>
         <span className='text-lg md:text-xl text-blueGray900'>Monthly amount</span>
         <span className='text-2xl md:text-[32px] font-medium text-brandColorSecondary font-rubik'>
           $
-          {monthlyAmount.toLocaleString('en-US', {
+          {formatCurrency(monthlyAmount, {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2
           })}
