@@ -9,6 +9,7 @@ import { calculateMonthlyAmount } from '@/utils/calculations'
 import { DEFAULT_AMOUNT } from '@/utils/constants'
 import { calculateMonthDifference } from '@/utils/date'
 import React, { useEffect, useState } from 'react'
+import HeaderCard from './HeaderCard'
 
 const SavingsGoalCard: React.FC = () => {
   // State management
@@ -52,16 +53,7 @@ const SavingsGoalCard: React.FC = () => {
     <>
       {/* Main Card */}
       <div className='w-full p-6 overflow-hidden bg-white rounded-lg md:px-10 md:py-8 shadow-level4'>
-        {/* Card Header */}
-        <div className='flex items-center mb-6'>
-          <div className='flex items-center justify-center mr-4 size-16'>
-            <img src='/icon-home.png' alt='Home Icon' className='w-full h-full text-blue-600' />
-          </div>
-          <div>
-            <h2 className='text-xl font-medium md:text-2xl text-blueGray900 font-rubik'>Buy a house</h2>
-            <p className='text-sm md:text-base text-blueGray400'>Saving goal</p>
-          </div>
-        </div>
+        <HeaderCard />
 
         {/* Input Fields */}
         <div className='flex items-center gap-4 mb-8'>
