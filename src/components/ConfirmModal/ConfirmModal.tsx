@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { X } from 'lucide-react'
 import { formatMonth, formatYear } from '@/utils/date'
-import { formatCurrency } from '@/utils/currency'
+import { formatCurrency, formatDisplayValue } from '@/utils/currency'
 import { MODAL_MESSAGES } from '@/utils/constants'
 import Button from '../ui/Button'
 type ConfirmModalProps = {
@@ -58,14 +58,34 @@ const ConfirmModal: React.FC<ConfirmModalProps> = ({ onClose, amount, monthlyAmo
 
         <div className='p-6 space-y-4'>
           <p className='text-gray-700'>
-            {MODAL_MESSAGES.save} <strong>${formatCurrency(amount)}</strong> by{' '}
+            {MODAL_MESSAGES.save}{' '}
+            <strong>
+              $
+              {formatDisplayValue(
+                formatCurrency(amount, {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2
+                })
+              )}
+            </strong>{' '}
+            by{' '}
             <strong>
               {formatMonth(reachDate)} {formatYear(reachDate)}
             </strong>
             .
           </p>
           <p className='text-gray-700'>
-            {MODAL_MESSAGES.monthly} <strong>${formatCurrency(monthlyAmount)}</strong> for {totalMonths} month
+            {MODAL_MESSAGES.monthly}{' '}
+            <strong>
+              $
+              {formatDisplayValue(
+                formatCurrency(monthlyAmount, {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2
+                })
+              )}
+            </strong>{' '}
+            for <strong>{totalMonths}</strong> month
             {totalMonths !== 1 ? 's' : ''}.
           </p>
         </div>

@@ -49,8 +49,8 @@ const DateSelector: React.FC<DateSelectorProps> = ({ selectedDate, onChangeDateS
     <div
       {...props}
       ref={containerRef}
-      tabIndex={0} // Thêm tabIndex để element có thể focus được
-      onClick={handleContainerClick} // Thêm onClick handler để focus khi click
+      tabIndex={0} // Make the div focusable
+      onClick={handleContainerClick}
       onKeyDown={handleKeyDown}
       className={classNames('input-primary', props.className)}
     >
