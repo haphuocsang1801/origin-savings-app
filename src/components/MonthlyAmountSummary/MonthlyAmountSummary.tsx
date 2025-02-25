@@ -1,4 +1,4 @@
-import { formatCurrency } from '@/utils/currency'
+import { formatCurrency, formatDisplayValue } from '@/utils/currency'
 import { formatMonth, formatYear } from '@/utils/date'
 
 interface MonthlyAmountSummaryProps {
@@ -11,14 +11,16 @@ interface MonthlyAmountSummaryProps {
 const MonthlyAmountSummary = ({ monthlyAmount, totalMonths, amount, reachDate }: MonthlyAmountSummaryProps) => {
   return (
     <div className='mb-8 overflow-hidden border rounded-lg border-blueGray50'>
-      <div className='flex items-center justify-between p-6 md:pt-6 md:pb-4 md:px-8'>
-        <span className='text-lg md:text-xl text-blueGray900'>Monthly amount</span>
-        <span className='text-2xl md:text-[32px] font-medium text-brandColorSecondary font-rubik'>
+      <div className='flex items-center justify-between gap-2 p-6 md:pt-6 md:pb-4 md:px-8'>
+        <span className='flex-shrink-0 text-lg md:text-xl text-blueGray900'>Monthly amount</span>
+        <span className='text-2xl md:text-[32px] font-medium text-brandColorSecondary font-rubik break-all'>
           $
-          {formatCurrency(monthlyAmount, {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2
-          })}
+          {formatDisplayValue(
+            formatCurrency(monthlyAmount, {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2
+            })
+          )}
         </span>
       </div>
       <div className='flex items-center justify-center px-6 py-8 text-center md:px-8 md:py-6 md:text-left bg-blueGray10'>

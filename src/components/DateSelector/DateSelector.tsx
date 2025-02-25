@@ -40,16 +40,19 @@ const DateSelector: React.FC<DateSelectorProps> = ({ selectedDate, onChangeDateS
         break
     }
   }
-
+  const handleContainerClick = () => {
+    if (containerRef.current) {
+      containerRef.current.focus()
+    }
+  }
   return (
     <div
       {...props}
       ref={containerRef}
+      tabIndex={0} // Thêm tabIndex để element có thể focus được
+      onClick={handleContainerClick} // Thêm onClick handler để focus khi click
       onKeyDown={handleKeyDown}
-      className={classNames(
-        'flex overflow-hidden border border-blueGray50 rounded-[4px] outline-none h-14 focus:border-brandColorPrimary focus:ring-1 focus:ring-primborder-brandColorPrimary',
-        props.className
-      )}
+      className={classNames('input-primary', props.className)}
     >
       <button
         type='button'

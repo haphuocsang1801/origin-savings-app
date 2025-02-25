@@ -27,3 +27,8 @@
     -webkit-font-smoothing: antialiased;
   }
 }
+@layer components {
+  .input-primary {
+    @apply transition-all w-full flex overflow-hidden border border-blueGray50 rounded-[4px] outline-none h-14 focus:border-brandColorSecondary;
+  }
+}
