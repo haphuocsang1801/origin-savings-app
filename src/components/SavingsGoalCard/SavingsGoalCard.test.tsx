@@ -22,7 +22,7 @@ describe('SavingsGoalCard', () => {
     })
   })
 
-  it('renders SavingsGoalCard component', () => {
+  test('renders SavingsGoalCard component', () => {
     render(<SavingsGoalCard />)
     expect(screen.getByText('Total amount')).toBeInTheDocument()
     expect(screen.getByText('Reach goal by')).toBeInTheDocument()

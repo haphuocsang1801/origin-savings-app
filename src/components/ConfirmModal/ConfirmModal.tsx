@@ -60,11 +60,12 @@ const ConfirmModal: React.FC<ConfirmModalProps> = ({ onClose, amount, monthlyAmo
           <p className='text-gray-700'>
             {MODAL_MESSAGES.save}{' '}
             <strong>
-              $
               {formatDisplayValue(
                 formatCurrency(amount, {
                   minimumFractionDigits: 2,
-                  maximumFractionDigits: 2
+                  maximumFractionDigits: 2,
+                  currency: 'USD',
+                  style: 'currency'
                 })
               )}
             </strong>{' '}
@@ -77,11 +78,12 @@ const ConfirmModal: React.FC<ConfirmModalProps> = ({ onClose, amount, monthlyAmo
           <p className='text-gray-700'>
             {MODAL_MESSAGES.monthly}{' '}
             <strong>
-              $
               {formatDisplayValue(
                 formatCurrency(monthlyAmount, {
                   minimumFractionDigits: 2,
-                  maximumFractionDigits: 2
+                  maximumFractionDigits: 2,
+                  currency: 'USD',
+                  style: 'currency'
                 })
               )}
             </strong>{' '}

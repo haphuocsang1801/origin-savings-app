@@ -1,6 +1,6 @@
 export const formatCurrency = (value: number, options?: Intl.NumberFormatOptions): string => {
   return new Intl.NumberFormat('en-US', {
-    ...options
+    ...options,
   }).format(value)
 }
 export const checkValidCurrency = (value: string): boolean => {
