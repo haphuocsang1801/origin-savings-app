@@ -48,6 +48,7 @@ const CurrencyInput = ({ value, onChangeCurrencyInput, name = 'amount', ...props
           <CurrencyIcon />
         </div>
         <input
+          data-testid='currency-input'
           {...props}
           name={name}
           type='text'
@@ -67,7 +68,11 @@ const CurrencyInput = ({ value, onChangeCurrencyInput, name = 'amount', ...props
           )}
         />
       </div>
-      {error && <p className='text-sm text-red-500'>Please enter a valid amount</p>}
+      {error && (
+        <p className='text-sm text-red-500' data-testid='currency-error-message'>
+          Please enter a valid amount
+        </p>
+      )}
     </div>
   )
 }

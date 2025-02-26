@@ -2,7 +2,6 @@ import { render, screen, fireEvent } from '@testing-library/react'
 import { formatMonth, formatYear, isDateInFuture, getNextMonth, getPreviousMonth } from '@/utils/date'
 import DateSelector from '../DateSelector'
 
-// Mock các utility functions từ @/utils/date
 jest.mock('@/utils/date', () => ({
   formatMonth: jest.fn(),
   formatYear: jest.fn(),
@@ -20,7 +19,7 @@ describe('DateSelector', () => {
   beforeEach(() => {
     jest.clearAllMocks()
 
-    // Cấu hình mặc định cho mock functions
+    // The default configuration for mock functions
     ;(formatMonth as jest.Mock).mockReturnValue('February')
     ;(formatYear as jest.Mock).mockReturnValue('2025')
     ;(getNextMonth as jest.Mock).mockReturnValue(mockNextMonth)

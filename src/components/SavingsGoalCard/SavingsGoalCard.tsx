@@ -45,7 +45,7 @@ const SavingsGoalCard: React.FC = () => {
         />
 
         {/* Card Footer */}
-        <Button className='mx-auto max-w-80' fullWidth onClick={() => setShowModal(true)}>
+        <Button data-testid='confirm-button' className='mx-auto max-w-80' fullWidth onClick={() => setShowModal(true)}>
           Confirm
         </Button>
       </div>
