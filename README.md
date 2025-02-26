@@ -1,79 +1,79 @@
 # Origin Savings App
 
-Ứng dụng giúp người dùng lên kế hoạch tiết kiệm và quản lý mục tiêu tài chính cá nhân.
+An application that helps users plan savings and manage personal financial goals.
 
-## Cài đặt
+## Installation
 
-### Yêu cầu hệ thống
-- Node.js (phiên bản 20.x trở lên)
+### System Requirements
+- Node.js (version 20.x or higher)
 
-### Các bước cài đặt
+### Installation Steps
 
-1. Clone repository về máy
+1. Clone the repository
 ```bash
 git clone <repository-url>
 cd origin-savings-app
 ```
 
-2. Cài đặt các dependencies
+2. Install dependencies
 ```bash
 npm install
-# hoặc
+# or
 yarn install
 ```
 
-3. Khởi động môi trường development
+3. Start the development environment
 ```bash
 npm run dev
-# hoặc
+# or
 yarn dev
 ```
 
-Ứng dụng sẽ chạy tại [http://localhost:3000](http://localhost:3000)
+The application will run at [http://localhost:3000](http://localhost:3000)
 
 
-## Cấu trúc project
+## Project Structure
 
 ```
 origin-savings-app/
-├── public/              # Tài nguyên tĩnh
-├── src/                 # Mã nguồn
-│   ├── assets/          # Hình ảnh, fonts, và các tài nguyên khác
-│   ├── components/      # React components tái sử dụng
-│   ├── contexts/        # React contexts và providers
+├── public/              # Static resources
+├── src/                 # Source code
+│   ├── assets/          # Images, fonts, and other resources
+│   ├── components/      # Reusable React components
+│   ├── contexts/        # React contexts and providers
 │   ├── hooks/           # Custom React hooks
-│   ├── pages/           # Các trang giao diện người dùng
-│   ├── services/        # Logic xử lý API và services
-│   ├── utils/           # Tiện ích và helper functions
-│   ├── App.js           # Component gốc của ứng dụng
-│   └── index.js         # Điểm khởi đầu của ứng dụng
-├── .gitignore           # Danh sách các file được git bỏ qua
-├── package.json         # Khai báo dependencies và scripts
-└── README.md            # File giới thiệu project
+│   ├── pages/           # User interface pages
+│   ├── services/        # API handling logic and services
+│   ├── utils/           # Utilities and helper functions
+│   ├── App.js           # Root application component
+│   └── index.js         # Application entry point
+├── .gitignore           # List of files ignored by git
+├── package.json         # Dependencies and scripts declaration
+└── README.md            # Project introduction file
 ```
 
 ## Testing
 
-### Chạy unit tests
+### Running unit tests
 ```bash
 npm run test
-# hoặc
+# or
 yarn test
 ```
 
-### Kiểm tra độ phủ (coverage) của tests
+### Check test coverage
 ```bash
 npm run test:coverage
-# hoặc
+# or
 yarn test:coverage
 ```
 
-## Build cho production
+## Production Build
 
 ```bash
 npm run build
-# hoặc
+# or
 yarn build
 ```
 
-Các file static sẽ được tạo trong thư mục `build/`.
+Static files will be generated in the `build/` directory.
