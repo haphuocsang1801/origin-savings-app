@@ -1,4 +1,11 @@
-import { formatMonth, formatYear, calculateMonthDifference, isDateInFuture, getNextMonth, getPreviousMonth } from './date'
+import {
+  formatMonth,
+  formatYear,
+  calculateMonthDifference,
+  isDateInFuture,
+  getNextMonth,
+  getPreviousMonth
+} from './date'
 
 describe('date utils', () => {
   test('formatMonth should return the correct month name', () => {

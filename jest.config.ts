@@ -1,11 +1,11 @@
 export default {
-  testEnvironment: "jsdom",
+  testEnvironment: 'jsdom',
   transform: {
-    '^.+\\.(ts|tsx)$': 'ts-jest',
+    '^.+\\.(ts|tsx)$': 'ts-jest'
   },
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1', // Cấu hình absolute import @/
-    '\\.(css|less|scss|sass)$': 'identity-obj-proxy', // Mock CSS modules
+    '\\.(css|less|scss|sass)$': 'identity-obj-proxy' // Mock CSS modules
   },
-  setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],
-};
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.ts']
+}
