@@ -39,6 +39,7 @@ export default tseslint.config(
           jsxSingleQuote: true,
         },
       ],
+      "no-useless-escape": "off",
     },
   }
 )

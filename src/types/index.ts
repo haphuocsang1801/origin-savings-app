@@ -1,9 +1,6 @@
 export type SavingsGoal = {
-  amount: number;
-  reachDate: Date;
-  monthlyAmount: number;
-  totalMonths: number;
+  amount: number
+  reachDate: Date
+  monthlyAmount: number
+  totalMonths: number
 }
-
-
-

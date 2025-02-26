@@ -9,6 +9,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   size?: ButtonSize
   fullWidth?: boolean
   children: React.ReactNode
+  'data-testid'?: string
 }
 
 const buttonVariants: Record<ButtonVariant, string> = {
@@ -28,6 +29,7 @@ const Button = ({
   type = 'button',
   onClick,
   fullWidth = false,
+  'data-testid': dataTestId = 'button',
   ...props
 }: ButtonProps) => {
   return (
@@ -35,6 +37,7 @@ const Button = ({
       type={type}
       disabled={disabled}
       onClick={onClick}
+      data-testid={dataTestId}
       className={classnames(
         'flex items-center justify-center font-semibold rounded-full transition-colors',
         buttonVariants[variant],

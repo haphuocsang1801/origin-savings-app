@@ -5,12 +5,7 @@ import { calculateMonthDifference } from '@/utils/date'
 import { useEffect, useState } from 'react'
 
 export const useSavingsGoal = (initialValues: Partial<SavingsGoal> = {}) => {
-  const {
-    amount = DEFAULT_AMOUNT,
-    reachDate = new Date(),
-    monthlyAmount = 0,
-    totalMonths = 0
-  } = initialValues
+  const { amount = DEFAULT_AMOUNT, reachDate = new Date(), monthlyAmount = 0, totalMonths = 0 } = initialValues
 
   const [savingsGoal, setSavingsGoal] = useState<SavingsGoal>({
     amount,
