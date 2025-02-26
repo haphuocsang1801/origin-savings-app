@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, KeyboardEvent } from 'react'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { formatMonth, formatYear, isDateInFuture, getNextMonth, getPreviousMonth } from '@/utils/date'
 import classNames from 'classnames'
+import ChevronLeft from '../icons/ChevronLeft'
+import ChevronRight from '../icons/ChevronRight'
 
 type DateSelectorProps = {
   selectedDate: Date
@@ -65,7 +66,8 @@ const DateSelector: React.FC<DateSelectorProps> = ({ selectedDate, onChangeDateS
         className='flex items-center justify-center w-12 transition-colors hover:bg-gray-50'
         data-testid='previous-month-button'
       >
-        <ChevronLeft className='w-6 h-6 text-blueGray300' />
+        {/* <ChevronLeft className='w-6 h-6 text-blueGray300' /> */}
+        <ChevronLeft />
       </button>
 
       <div className='flex flex-col items-center justify-center flex-1 text-blueGray900'>
@@ -83,7 +85,7 @@ const DateSelector: React.FC<DateSelectorProps> = ({ selectedDate, onChangeDateS
         className='flex items-center justify-center w-12 transition-colors hover:bg-gray-50'
         data-testid='next-month-button'
       >
-        <ChevronRight className='w-5 h-5 text-blueGray300' />
+        <ChevronRight />
       </button>
     </div>
   )
