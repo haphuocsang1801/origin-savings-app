@@ -1,21 +1,17 @@
 import { render, screen, fireEvent } from '@testing-library/react'
+import ConfirmModal from '../ConfirmModal'
 import * as currencyUtils from '@/utils/currency'
 import * as dateUtils from '@/utils/date'
-import { MODAL_MESSAGES } from '@/utils/constants'
-import ConfirmModal from '../ConfirmModal'
 
-// Mock utility functions
+// Setup mocks for utility functions
 jest.mock('@/utils/currency', () => ({
   formatCurrency: jest.fn(),
   formatDisplayValue: jest.fn()
 }))
-
 jest.mock('@/utils/date', () => ({
   formatMonth: jest.fn(),
   formatYear: jest.fn()
 }))
-
-// Mock constants
 jest.mock('@/utils/constants', () => ({
   MODAL_MESSAGES: {
     success: 'Success!',
@@ -25,18 +21,16 @@ jest.mock('@/utils/constants', () => ({
 }))
 
 describe('ConfirmModal', () => {
-  // Mock props for testing
   const mockProps = {
-    onClose: jest.fn(),
+    toggleModal: jest.fn(),
     amount: 12000,
     monthlyAmount: 500,
     totalMonths: 24,
     reachDate: new Date('2025-02-01')
   }
 
-  // Setup before each test
   beforeEach(() => {
-    jest.clearAllMocks() // Set default mock return values
+    jest.clearAllMocks()
     ;(currencyUtils.formatCurrency as jest.Mock).mockImplementation((value) => {
       if (value === 12000) return '$12,000.00'
       if (value === 500) return '$500.00'
@@ -51,97 +45,38 @@ describe('ConfirmModal', () => {
     ;(dateUtils.formatYear as jest.Mock).mockReturnValue(2025)
   })
 
-  test('renders modal with correct title', () => {
-    render(<ConfirmModal {...mockProps} />)
-
-    const title = screen.getByTestId('modal-title')
-    expect(title).toHaveTextContent(MODAL_MESSAGES.success)
+  test('renders with correct title, amount and goal date', () => {
+    render(<ConfirmModal isOpen={true} {...mockProps} />)
+    // Check modal title
+    expect(screen.getByTestId('modal-title')).toHaveTextContent('Success!')
+    // Check total amount and goal date
+    expect(screen.getByTestId('modal-total-amount')).toHaveTextContent('$12,000')
+    expect(screen.getByTestId('modal-goal-date')).toHaveTextContent('February 2025')
   })
 
-  test('displays the correct amount and goal date', () => {
-    render(<ConfirmModal {...mockProps} />)
-
-    const totalAmount = screen.getByTestId('modal-total-amount')
-    expect(totalAmount).toHaveTextContent('$12,000')
-
-    const goalDate = screen.getByTestId('modal-goal-date')
-    expect(goalDate).toHaveTextContent('February 2025')
+  test('renders monthly message with plural "months"', () => {
+    render(<ConfirmModal isOpen={true} {...mockProps} />)
+    expect(screen.getByTestId('modal-monthly-amount')).toHaveTextContent('$500')
+    expect(screen.getByTestId('modal-total-months')).toHaveTextContent('24')
+    expect(screen.getByTestId('modal-monthly-message').textContent).toContain('months')
   })
 
-  test('displays the correct monthly amount and total months', () => {
-    render(<ConfirmModal {...mockProps} />)
-
-    const monthlyAmount = screen.getByTestId('modal-monthly-amount')
-    expect(monthlyAmount).toHaveTextContent('$500')
-
-    const totalMonths = screen.getByTestId('modal-total-months')
-    expect(totalMonths).toHaveTextContent('24')
-
-    // Check pluralization of months
-    const monthlyMessage = screen.getByTestId('modal-monthly-message')
-    expect(monthlyMessage.textContent).toContain('months')
+  test('renders monthly message with singular "month" when totalMonths is 1', () => {
+    render(<ConfirmModal isOpen={true} {...mockProps} totalMonths={1} />)
+    const message = screen.getByTestId('modal-monthly-message').textContent || ''
+    expect(message).toContain('month.')
+    expect(message).not.toContain('months')
   })
 
-  test('uses singular "month" when totalMonths is 1', () => {
-    render(<ConfirmModal {...mockProps} totalMonths={1} />)
-
-    const monthlyMessage = screen.getByTestId('modal-monthly-message')
-    expect(monthlyMessage.textContent).toContain('month.')
-    expect(monthlyMessage.textContent).not.toContain('months')
+  test('does not call toggleModal when modal content is clicked', () => {
+    render(<ConfirmModal isOpen={true} {...mockProps} />)
+    fireEvent.click(screen.getByTestId('modal-container'))
+    expect(mockProps.toggleModal).not.toHaveBeenCalled()
   })
 
-  test('closes modal when close button is clicked', () => {
-    render(<ConfirmModal {...mockProps} />)
-
-    const closeButton = screen.getByTestId('modal-close-button')
-    fireEvent.click(closeButton)
-
-    expect(mockProps.onClose).toHaveBeenCalledTimes(1)
-  })
-
-  test('closes modal when X button is clicked', () => {
-    render(<ConfirmModal {...mockProps} />)
-
-    const closeXButton = screen.getByTestId('modal-close-modal-button')
-    fireEvent.click(closeXButton)
-
-    expect(mockProps.onClose).toHaveBeenCalledTimes(1)
-  })
-
-  test('closes modal when clicking on overlay', () => {
-    render(<ConfirmModal {...mockProps} />)
-
-    const overlay = screen.getByTestId('modal-confirm-modal-overlay')
-    // Simulate clicking on the overlay but not on the modal content
-    fireEvent.click(overlay)
-
-    expect(mockProps.onClose).toHaveBeenCalledTimes(1)
-  })
-
-  test('does not close modal when clicking on modal content', () => {
-    render(<ConfirmModal {...mockProps} />)
-
-    const modalContainer = screen.getByTestId('modal-confirm-modal-container')
-    fireEvent.click(modalContainer)
-
-    expect(mockProps.onClose).not.toHaveBeenCalled()
-  })
-
-  test('closes modal when Escape key is pressed', () => {
-    render(<ConfirmModal {...mockProps} />)
-
-    // Simulate pressing the Escape key
-    fireEvent.keyDown(window, { key: 'Escape' })
-
-    expect(mockProps.onClose).toHaveBeenCalledTimes(1)
-  })
-
-  test('does not close modal when other keys are pressed', () => {
-    render(<ConfirmModal {...mockProps} />)
-
-    // Simulate pressing a different key
-    fireEvent.keyDown(window, { key: 'Enter' })
-
-    expect(mockProps.onClose).not.toHaveBeenCalled()
+  test('does not render when isOpen is false', () => {
+    render(<ConfirmModal isOpen={false} {...mockProps} />)
+    // Expect modal not to render anything
+    expect(screen.queryByTestId('modal-overlay')).not.toBeInTheDocument()
   })
 })

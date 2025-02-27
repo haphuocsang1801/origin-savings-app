@@ -50,15 +50,14 @@ const SavingsGoalCard: React.FC = () => {
         </Button>
       </div>
       {/* Confirmation Modal */}
-      {showModal && (
-        <ConfirmModal
-          onClose={() => setShowModal(false)}
-          amount={savingsGoal.amount}
-          monthlyAmount={savingsGoal.monthlyAmount}
-          totalMonths={savingsGoal.totalMonths}
-          reachDate={savingsGoal.reachDate}
-        />
-      )}
+      <ConfirmModal
+        isOpen={showModal}
+        toggleModal={() => setShowModal(!showModal)}
+        amount={savingsGoal.amount}
+        monthlyAmount={savingsGoal.monthlyAmount}
+        totalMonths={savingsGoal.totalMonths}
+        reachDate={savingsGoal.reachDate}
+      />
     </>
   )
 }
