@@ -36,7 +36,7 @@ const MonthlyAmountSummary = ({ monthlyAmount, totalMonths, amount, reachDate }:
             {totalMonths} monthly deposits
           </strong>{' '}
           to reach your{' '}
-          <strong className='font-semibold' data-testid='totalAmount'>
+          <strong className='font-semibold break-all' data-testid='totalAmount'>
             {formatDisplayValue(
               formatCurrency(amount, {
                 minimumFractionDigits: 2,
