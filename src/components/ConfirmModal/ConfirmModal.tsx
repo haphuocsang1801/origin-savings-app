@@ -35,7 +35,7 @@ const ConfirmModal: React.FC<ConfirmModalProps> = ({
         <div className='p-6 space-y-4'>
           <p className='text-gray-700' data-testid='modal-save-message'>
             {MODAL_MESSAGES.save}{' '}
-            <strong data-testid='modal-total-amount'>
+            <strong data-testid='modal-total-amount' className='break-all'>
               {formatDisplayValue(
                 formatCurrency(amount, {
                   minimumFractionDigits: 2,
@@ -53,7 +53,7 @@ const ConfirmModal: React.FC<ConfirmModalProps> = ({
           </p>
           <p className='text-gray-700' data-testid='modal-monthly-message'>
             {MODAL_MESSAGES.monthly}{' '}
-            <strong data-testid='modal-monthly-amount'>
+            <strong data-testid='modal-monthly-amount' className='break-all'>
               {formatDisplayValue(
                 formatCurrency(monthlyAmount, {
                   minimumFractionDigits: 2,
